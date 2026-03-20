@@ -1,4 +1,5 @@
 import random
+from singlylinkedlist import SinglyLinkedList
 
 def gerar_lista(tamanho, reverso=False, aleatorio=False):
     inicio, fim, pace = 0, tamanho, 1
@@ -17,10 +18,20 @@ def gerar_lista(tamanho, reverso=False, aleatorio=False):
     return lista
 
 
-
-
 def linear_search(arr, target) -> tuple[int, str]:
     counter = 0
+    if isinstance(arr, SinglyLinkedList):
+        if(arr.inicio == None):
+            return (0, "Lista encadeada não possui nodos")
+
+        ptr = arr.inicio
+        while ptr:
+            counter += 1
+            if(ptr.value == target):
+                return (counter, f"Contagens busca linear em lista encadeada: {counter}")
+            ptr = ptr.next
+        return (-1, f"Contagens busca linear em lista encadeada para indice não localizado: {counter}")
+
     if(len(arr) == 0):
         return (-1, f"ERRO: array vazio. Contador: {counter}")
     if(len(arr) == 1):
@@ -29,13 +40,13 @@ def linear_search(arr, target) -> tuple[int, str]:
             return (0, f"Contagens busca linear em lista ordenada de tamanho {len(arr)}: {counter}")
         else:
             return (-1, f"Contagens busca linear em lista ordenada de tamanho {len(arr)} para indice não localizado: {counter}")
-                        
+
+
     for i in range(0, len(arr)):
         counter += 1
         if arr[i] == target:
             return (i, f"Contagens busca linear em lista ordenada de tamanho {len(arr)}: {counter}")
     return (-1, f"Contagens busca linear em lista ordenada de tamanho {len(arr)} para indice não localizado: {counter}")
-
 
 def binary_search(sorted_arr, target) -> tuple[int, str]:
     sorted_asc = all(sorted_arr[i] <= sorted_arr[i + 1] for i in range(len(sorted_arr) - 1))
@@ -110,6 +121,12 @@ lista_dois_aleatoria = gerar_lista(1000, aleatorio=True)
 lista_tres_aleatoria = gerar_lista(10000, aleatorio=True)
 lista_quatro_aleatoria = gerar_lista(100000, aleatorio=True)
 lista_cinco_aleatoria = gerar_lista(1000000, aleatorio=True)
+
+#lista encadeada
+
+lista_encadeada = SinglyLinkedList()
+for i in range(0, 10000):
+    lista_encadeada.add(i)
 
 #######    Registro de contagens
 demo_ordenadas = 0
@@ -304,6 +321,6 @@ if demo_aleatorias:
     result = binary_search(lista_cinco_aleatoria, 1000001)
     print(result[1], '\n', f"Indice retornado: {result[0]}")
 
-result = binary_search(lista_cinco_aleatoria, 104)
-print(result[1], '\n', f"Indice retornado: {result[0]}")
+result = linear_search(lista_encadeada, 104)
+print(result[1], '\n', f"Nodo retornado: {result[0]}")
 
