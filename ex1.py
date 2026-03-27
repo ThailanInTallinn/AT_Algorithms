@@ -1,21 +1,6 @@
-import random
+from listgenerator import gerar_lista
 from singlylinkedlist import SinglyLinkedList
 
-def gerar_lista(tamanho, reverso=False, aleatorio=False):
-    inicio, fim, pace = 0, tamanho, 1
-    if aleatorio:
-        lista = []
-        for i in range(0, tamanho):
-            lista.append(random.randint(1, tamanho))
-        return lista
-
-    if reverso:
-        inicio = tamanho
-        fim = 0
-        pace = -1
-
-    lista = [i for i in range(inicio, fim, pace)]  
-    return lista
 
 
 def linear_search(arr, target) -> tuple[int, str]:
