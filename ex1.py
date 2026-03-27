@@ -1,8 +1,6 @@
 from listgenerator import gerar_lista
 from singlylinkedlist import SinglyLinkedList
 
-
-
 def linear_search(arr, target) -> tuple[int, str]:
     counter = 0
     if isinstance(arr, SinglyLinkedList):

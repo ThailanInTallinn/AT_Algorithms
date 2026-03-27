@@ -1,16 +1,10 @@
 from listgenerator import gerar_lista
+from sort import bubble_sort
 
-def bubble_sort(lista):
-    done = False
+# listas com 1000 itens
 
-    while not done:
-        done = True
-        for i in range(0, len(lista) - 1):
-            if(lista[i] > lista[i + 1]):
-                done = False
-                temp = lista[i + 1]
-                lista[i + 1] =  lista[i]
-                lista[i] = temp
-
-    return lista
+lista_ord = gerar_lista(1000)
+lista_rev = gerar_lista(1000, reverso=True)
+lista_random = gerar_lista(1000, aleatorio=True)
+lista_quase_ord = gerar_lista(1000, quase_ord=True)
 
