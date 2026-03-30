@@ -7,43 +7,65 @@ class Nodo:
 class BST:
     def __init__(self):
         self.raiz = None
-        
+        self.counter_busca = 0        
+        self.counter_traverse = 0
+
     def inserir(self, chave):
-        if self.raiz == None:
+        if self.raiz is None:
             self.raiz = Nodo(chave)
         else:
             self._inserir_recursivo(self.raiz, chave)
 
     def _inserir_recursivo(self, no_atual, chave):
         if chave < no_atual.chave:
-            if no_atual.esquerda == None:
+            if no_atual.esquerda is None:
                 no_atual.esquerda = Nodo(chave)
             else:
                 self._inserir_recursivo(no_atual.esquerda, chave)
         elif chave > no_atual.chave:
-            if no_atual.direita == None:
+            if no_atual.direita is None:
                 no_atual.direita = Nodo(chave)
             else:
                 self._inserir_recursivo(no_atual.direita, chave)
 
     def buscar(self, chave):
-        counter = 0
         return self._buscar_recursivo(self.raiz, chave)
 
     def _buscar_recursivo(self, no_atual, chave):
-        counter += 1 
-        if no_atual == None or no_atual == chave:
+        self.counter_busca += 1 
+        if no_atual is None or no_atual.chave == chave:
             return no_atual
         if chave < no_atual.chave:
             return self._buscar_recursivo(no_atual.esquerda, chave)
         return self._buscar_recursivo(no_atual.direita, chave)
     
-    def em_ordem(self, no_atual, counter):
+    def visualizar(self):
+        return self.em_ordem(self.raiz, self.counter_traverse)
+        
+    def em_ordem(self, no_atual, counter=0):
         counter += 1 
         if no_atual:
             self.em_ordem(no_atual.esquerda, counter)
-            print(no_atual.valor, end=" ")
+            print(no_atual.chave, end=" ")
             self.em_ordem(no_atual.direita, counter)
+
+    def traverse_em_ordem(self, no):
+        self.counter_traverse += 1
+        if not no:
+            return []
+        return (self.traverse_em_ordem(no.esquerda) +
+                [no.chave] + 
+                self.traverse_em_ordem(no.direita))
+
+
+    def exibir(self, no_atual=None, nivel=0):
+        if no_atual == None and nivel == 0:
+            no_atual = self.raiz
+        if no_atual is not None:
+            self.exibir(no_atual.direita, nivel+1)
+            print('     '*nivel + f'-> {no_atual.chave}')
+            self.exibir(no_atual.esquerda, nivel+1)
+
 
 
     
