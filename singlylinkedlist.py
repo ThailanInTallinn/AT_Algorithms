@@ -17,8 +17,8 @@ class SinglyLinkedList:
         
     def insert_last(self, value):
         new_obj = ListNode(value)
-        self.tail = new_obj
         new_obj.index = self.length
+        self.tail = new_obj
 
         if not self.inicio:
             self.inicio = new_obj
@@ -57,13 +57,13 @@ class SinglyLinkedList:
             if(curr_node.value == value):
                 return curr_node
             curr_node = curr_node.next
-        print("Item não encontrado.")
+        print("Item não encontrado.", end="\n\n")
         return -1
 
     def delete(self, value):
         item = self.search(value)
         if(item == -1):
-           print(f"Falha na deleção: valor não encontrado")
+           print(f"Falha na deleção: valor não encontrado", end="\n\n")
            return -1
         curr_node = self.inicio
         while curr_node:
@@ -76,6 +76,59 @@ class SinglyLinkedList:
         while curr_node.next:
             curr_node.next.index -= 1
             curr_node = curr_node.next
+        self.tail = curr_node
         return 1
 
+    def insert_at(self, index, value):
+        if index < 0:
+            print("Erro: index menor que 0", end="\n\n")
+            return -1
+        elif index > self.tail.index:
+            self.insert_last(value)
+            return 1
 
+        curr_node = self.inicio
+        while curr_node:
+            if(curr_node.next.index == index):
+                break
+            curr_node = curr_node.next
+
+        new_obj = ListNode(value)
+        new_obj.index = index
+        new_obj.next = curr_node.next
+        curr_node.next = new_obj
+        pointer = new_obj.next
+        while pointer:
+            if pointer.next is None:
+                self.tail = pointer
+            pointer.index += 1
+            pointer = pointer.next
+        return 1
+        
+    def delete_at(self, index):
+        if index < 0:
+            print("Erro: index menor que 0", end="\n\n")
+            return -1
+        elif index > self.tail.index:
+            index = self.tail.index
+
+        pointer = self.inicio
+        while pointer:
+            if pointer.next.index == index:
+                break
+            pointer = pointer.next
+
+        pointer.next = pointer.next.next
+        pointer = pointer.next
+        while pointer:
+            if pointer.next is None:
+                self.tail = pointer
+            pointer.index -= 1
+            pointer = pointer.next
+        return 1
+
+    def exibir(self):
+        pointer = self.inicio
+        while pointer:
+            print(f"Index: {pointer.index} | Valor: {pointer.value}")
+            pointer = pointer.next
