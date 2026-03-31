@@ -59,16 +59,15 @@ class BST:
 
 
     def exibir(self, no_atual=None, nivel=0):
-        if no_atual == None and nivel == 0:
+        if no_atual == none and nivel == 0:
             no_atual = self.raiz
-        if no_atual is not None:
+        if no_atual is not none:
             self.exibir(no_atual.direita, nivel+1)
             print('     '*nivel + f'-> {no_atual.chave}')
             self.exibir(no_atual.esquerda, nivel+1)
 
 
 
-    
 class No:
     def __init__(self, valor):
         self.valor = valor
