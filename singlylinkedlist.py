@@ -49,6 +49,7 @@ class SinglyLinkedList:
         while curr_node:
             curr_node.index += 1
             curr_node = curr_node.next
+        self.length += 1
         return
 
     def search(self, value):
@@ -77,6 +78,7 @@ class SinglyLinkedList:
             curr_node.next.index -= 1
             curr_node = curr_node.next
         self.tail = curr_node
+        self.length -= 1
         return 1
 
     def insert_at(self, index, value):
@@ -103,6 +105,7 @@ class SinglyLinkedList:
                 self.tail = pointer
             pointer.index += 1
             pointer = pointer.next
+        self.length += 1
         return 1
         
     def delete_at(self, index):
@@ -125,6 +128,7 @@ class SinglyLinkedList:
                 self.tail = pointer
             pointer.index -= 1
             pointer = pointer.next
+        self.length -= 1
         return 1
 
     def exibir(self):
