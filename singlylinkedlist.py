@@ -132,3 +132,13 @@ class SinglyLinkedList:
         while pointer:
             print(f"Index: {pointer.index} | Valor: {pointer.value}")
             pointer = pointer.next
+
+    def __str__(self):
+        if self.__len__() == 0:
+            print("Lista vazia", end="\n\n")
+            return -1
+
+        pointer = self.inicio
+        while pointer:
+            print(f"{pointer.value}->", end=" ")
+            pointer = pointer.next
