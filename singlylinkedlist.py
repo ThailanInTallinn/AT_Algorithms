@@ -18,19 +18,15 @@ class SinglyLinkedList:
     def insert_last(self, value):
         new_obj = ListNode(value)
         new_obj.index = self.length
-        self.tail = new_obj
+        self.length += 1
 
         if not self.inicio:
             self.inicio = new_obj
-            self.length += 1
+            self.tail = new_obj
             return
 
-        current_tail = self.inicio
-        while current_tail.next:
-            current_tail = current_tail.next
-
-        current_tail.next = new_obj
-        self.length += 1
+        self.tail.next = new_obj
+        self.tail = new_obj
         return
 
     def __len__(self):
